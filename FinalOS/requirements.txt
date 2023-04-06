@@ -1,0 +1,8 @@
+crontab
+os
+subprocess
+requests
+csv
+matplotlib
+re
+platform
