@@ -11,7 +11,7 @@ def program2():
     subprocess.run(["python3", "Desc.py"])
 
 def program3():
-    print("Scan des ports")
+    print("Prevoir les scans")
     subprocess.run(["python3", "Auto.py"])
 
 menu_options = {

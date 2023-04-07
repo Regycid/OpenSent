@@ -2,23 +2,21 @@ import requests
 import csv
 import matplotlib.pyplot as plt
 
-# Ouvrir le fichier CSV
+#Ouvre le fichier CSV et ajoute les cves pour chaque paquet ligne par ligne
 with open('vulns.txt') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     packages = {}
     
-    # Lire les données ligne par ligne
     for row in csv_reader:
         package = row['Package']
         cve = row['CVE']
-        
-        # Ajouter les cves pour chaque paquet
+    
         if package not in packages:
             packages[package] = 1
         else:
             packages[package] += 1
     
-    # Créer le diagramme à barres
+#Créer le diagramme à barres
     plt.bar(packages.keys(), packages.values())
     plt.xlabel('Paquets')
     plt.ylabel('Nombre de CVEs')
@@ -27,17 +25,16 @@ with open('vulns.txt') as csv_file:
     plt.show()
 
 
-# Lecture du fichier texte
+#Lecture du fichier texte et separation des donnees par des virgules
 with open('vulns.txt', 'r') as file:
     data = file.readlines()
 
-# Traitement des données
 rows = []
 for line in data:
     row = line.strip().split(',')
     rows.append(row)
 
-# Écriture des données dans le fichier CSV
+#Écriture des données dans le fichier CSV
 with open('packages.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(rows)
@@ -46,7 +43,7 @@ with open('packages.csv', 'r') as file:
     reader = csv.DictReader(file, delimiter=',')
     data = [row for row in reader]
 
-# Comptage des vulnérabilités par niveau de gravité
+#Compte des vulnérabilités par niveau de gravité
 severity_counts = {}
 for row in data:
     severity = row['Severity']
@@ -55,7 +52,7 @@ for row in data:
     else:
         severity_counts[severity] = 1
 
-# Affichage du graphique
+#Affichage du graphique
 
 colors = {'CRITICAL': 'red', 'HIGH': 'orange', 'MEDIUM': 'yellow', 'LOW': 'green', 'None': 'gray'}
 fig, ax = plt.subplots()

@@ -18,8 +18,8 @@ with open('version.txt','w') as versionFile:
             elif platform.system() == 'Windows':
                 fields = re.split('\s{2,}', line)
                 if len(fields) > 2:
-                    version = fields[-1]
+                    version = fields[1]
 #Affiche le nom du paquet et sa version 
                     
-                    print(fields[0],':'.join(fields), version, file = versionFile)
+                    print(':'.join(fields[0:1]), version, file = versionFile)
 subprocess.run(["python3", "Vuln.py"])

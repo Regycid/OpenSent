@@ -18,7 +18,7 @@ with open("version.txt", "r") as file, open("vulns.txt", "w") as output_file:
         response = requests.get(url)
 
         #Verifie que la reponse est valide et exporte les resultats
-        if response.status_code == 200:
+        if response.status_code == 200 and any(char.isdigit() for char in package_version):
             results = response.json()["result"]["CVE_Items"]
             for result in results:
                 cve_id = result["cve"]["CVE_data_meta"]["ID"]
@@ -29,4 +29,4 @@ with open("version.txt", "r") as file, open("vulns.txt", "w") as output_file:
                 output_file.write(f"{package_name},{package_version},{cve_id},{cve_severity}\n")
                 print(f"{package_name},{package_version},{cve_id},{cve_severity}")
         else:
-            print(f"Une erreur est arrivee avec {package_name} {package_version}")
+            print(f"Pas d'information pour {package_info[0]} {package_info[1]}")
